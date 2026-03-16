@@ -6,7 +6,7 @@ from langchain_groq import ChatGroq
 def create_rag_chain(retriever, api_key):
 
     llm = ChatGroq(
-        model="llama3-8b-8192",
+        model="llama-3.1-8b-instant",
         api_key=api_key
     )
 
