@@ -1,4 +1,4 @@
-from langchain.chains import RetrievalQA
+from langchain_classic.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain_groq import ChatGroq
 
