@@ -1,5 +1,6 @@
 streamlit
 langchain-classic
+langchain-core
 langchain-community
 langchain-groq
 langchain-text-splitters
