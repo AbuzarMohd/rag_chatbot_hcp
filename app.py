@@ -1,6 +1,6 @@
 import streamlit as st
 
-from src.pdf_loader import load_pdf
+from src.pdf_loader import load_pdfs
 from src.text_splitter import split_documents
 from src.vector_store import create_vector_store
 from src.retriever import get_retriever
@@ -9,19 +9,29 @@ from src.rag_chain import create_rag_chain
 
 st.title("PDF RAG Chatbot")
 
+# Get Groq API key
 api_key = st.secrets["GROQ_API_KEY"]
 
-documents = load_pdf("data/documents.pdf")
 
-chunks = split_documents(documents)
+@st.cache_resource
+def initialize_rag():
 
-vectorstore = create_vector_store(chunks, api_key)
+    documents = load_pdfs("data")
 
-retriever = get_retriever(vectorstore)
+    chunks = split_documents(documents)
 
-qa_chain = create_rag_chain(retriever, api_key)
+    vectorstore = create_vector_store(chunks)
 
-query = st.text_input("Ask a question from the PDF")
+    retriever = get_retriever(vectorstore)
+
+    qa_chain = create_rag_chain(retriever, api_key)
+
+    return qa_chain
+
+
+qa_chain = initialize_rag()
+
+query = st.text_input("Ask a question from the PDFs")
 
 if query:
     response = qa_chain.run(query)
