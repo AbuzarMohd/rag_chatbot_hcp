@@ -4,7 +4,8 @@ from langchain_community.document_loaders import PyPDFLoader
 
 def load_pdfs(data_path="data"):
     """
-    Load all PDF files from the data folder and return LangChain documents.
+    Load all PDF files from the data folder.
+    Skip corrupted PDFs.
     """
 
     documents = []
@@ -15,10 +16,12 @@ def load_pdfs(data_path="data"):
 
             file_path = os.path.join(data_path, file)
 
-            loader = PyPDFLoader(file_path)
+            try:
+                loader = PyPDFLoader(file_path)
+                pdf_docs = loader.load()
+                documents.extend(pdf_docs)
 
-            pdf_docs = loader.load()
-
-            documents.extend(pdf_docs)
+            except Exception as e:
+                print(f"Skipping {file} due to error: {e}")
 
     return documents
