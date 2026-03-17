@@ -9,9 +9,8 @@ from src.rag_chain import create_rag_chain
 
 st.title("PDF RAG Chatbot")
 
-# Get Groq API key
-api_key = st.secrets["GROQ_API_KEY"]
-
+# Get Google API key
+api_key = st.secrets["GOOGLE_API_KEY"]
 
 @st.cache_resource
 def initialize_rag():
@@ -34,5 +33,5 @@ qa_chain = initialize_rag()
 query = st.text_input("Ask a question from the PDFs")
 
 if query:
-    response = qa_chain.run(query)
-    st.write(response)
+    response = qa_chain.invoke({"query": query})
+    st.write(response["result"])
