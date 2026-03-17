@@ -1,41 +1,18 @@
-from langchain_classic.chains import RetrievalQA
-from langchain_core.prompts import PromptTemplate
-from langchain_groq import ChatGroq
+from langchain.chains import RetrievalQA
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 
 def create_rag_chain(retriever, api_key):
 
-    llm = ChatGroq(
-        model="llama-3.1-8b-instant",
-        api_key=api_key
-    )
-
-    prompt_template = """
-You are a college professor helping students understand their study material.
-
-Use ONLY the context provided below to answer the question.
-
-If the answer is not present in the context, say:
-"I cannot find the answer in the provided documents."
-
-Context:
-{context}
-
-Question:
-{question}
-
-Answer:
-"""
-
-    prompt = PromptTemplate(
-        template=prompt_template,
-        input_variables=["context", "question"]
+    llm = ChatGoogleGenerativeAI(
+        model="gemini-1.5-flash",
+        google_api_key=api_key,
+        temperature=0.3
     )
 
     qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
-        retriever=retriever,
-        chain_type_kwargs={"prompt": prompt}
+        retriever=retriever
     )
 
     return qa_chain
