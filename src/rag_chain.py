@@ -9,9 +9,10 @@ def create_rag_chain(retriever, api_key):
         asyncio.set_event_loop(asyncio.new_event_loop())
 
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.0-flash",
-        google_api_key=api_key,
-        temperature=0.3
+    model="gemini-2.0-flash-lite",
+    google_api_key=api_key,
+    temperature=0.3,
+    max_retries=1  # ✅ prevents burning quota on retries
     )
 
     qa_chain = RetrievalQA.from_chain_type(
