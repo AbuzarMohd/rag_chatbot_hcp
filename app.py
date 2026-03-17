@@ -10,7 +10,7 @@ from src.rag_chain import create_rag_chain
 st.title("PDF RAG Chatbot")
 
 # Get Google API key
-api_key = st.secrets["GOOGLE_API_KEY"]
+api_key = st.secrets.get["GOOGLE_API_KEY"]
 
 @st.cache_resource
 def initialize_rag():
