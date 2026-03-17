@@ -1,9 +1,9 @@
 streamlit
 langchain==0.3.25
 langchain-community==0.3.25
-langchain-google-genai==2.1.12
+langchain-google-genai==1.0.10
 pypdf
 chromadb
 tiktoken
-sentence-transformers
 langchain-huggingface
+sentence-transformers
