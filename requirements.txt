@@ -1,11 +1,7 @@
 streamlit
 langchain==0.1.20
-langchain-classic
-langchain-core
-langchain-community
-langchain-groq
+langchain-community==0.0.38
 langchain-google-genai
-langchain-text-splitters
 pypdf
 chromadb
 tiktoken
