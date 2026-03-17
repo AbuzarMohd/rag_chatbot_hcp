@@ -7,8 +7,8 @@ def split_documents(documents):
     """
 
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
-        chunk_overlap=200,
+        chunk_size=800,
+        chunk_overlap=150,
         separators=["\n\n", "\n", ".", " ", ""]
     )
 
