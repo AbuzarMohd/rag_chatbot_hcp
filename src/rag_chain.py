@@ -12,7 +12,7 @@ def create_rag_chain(retriever, api_key):
         asyncio.set_event_loop(asyncio.new_event_loop())
 
     llm = ChatGoogleGenerativeAI(
-        model="Gemini 2.5 Flash",
+        model="gemini-1.5-flash",
         google_api_key=api_key,
         temperature=0.3
     )
